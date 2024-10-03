@@ -1,17 +1,28 @@
 {
   "name": "test-external-library",
-  "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "files": ["dist"],
+  "main": "./dist/test-lib.umd.cjs",
+  "module": "./dist/test-lib.js",
+  "exports": {
+    ".": {
+      "import": "./dist/test-lib.js",
+      "require": "./dist/test-lib.umd.cjs"
+    },
+    "./style.css": "./dist/style.css"
+  },
+  "types": "./dist/index.d.ts",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc -b && vite build",
+    "build": "vite build && vue-tsc --emitDeclarationOnly",
     "preview": "vite preview"
   },
   "dependencies": {
     "vue": "^3.4.37"
   },
   "devDependencies": {
+    "@types/node": "^22.7.4",
     "@vitejs/plugin-vue": "^5.1.2",
     "typescript": "^5.5.3",
     "vite": "^5.4.1",
